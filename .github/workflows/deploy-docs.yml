@@ -19,10 +19,20 @@ jobs:
 
       - run: npm ci
 
-      - run: npm run build
+      # - run: npm i
+      #   working-directory: ./packages/tokens
+
+      # - run: npm run build
+      #   working-directory: ./packages/tokens
+
+      # - run: npm run build
+      #   working-directory: ./packages/react
+
+      # - run: npm run build
+      #   working-directory: ./packages/docs
 
       - name: Deploy storybook
         working-directory: ./packages/docs
-        run: npm run deploy-storybook -- --ci --existing-output-dir=storybook-static
+        run: touch storybook-static/.nojekyll && npm run deploy-storybook -- --ci --existing-output-dir=storybook-static
         env:
           GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
